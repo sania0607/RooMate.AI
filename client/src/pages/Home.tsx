@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Navigation from "@/components/Navigation";
+import { IceBreaker } from "@/components/IceBreaker";
 import { 
   Heart, 
   Users, 
@@ -32,7 +33,8 @@ import {
   ArrowRight,
   Target,
   Coffee,
-  Palette
+  Palette,
+  Lightbulb
 } from "lucide-react";
 
 export default function Home() {
@@ -457,33 +459,7 @@ export default function Home() {
               <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/10 rounded-full"></div>
             </Card>
 
-            {/* Room Tour Card */}
-            <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <CardContent className="p-8 relative z-10">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                    <House className="w-7 h-7 text-white" />
-                  </div>
-                  <Badge className="bg-white/20 text-white border-white/30">
-                    New
-                  </Badge>
-                </div>
-                
-                <h3 className="text-2xl font-bold mb-3">Room Tour</h3>
-                <p className="text-cyan-100 mb-6 leading-relaxed">
-                  Explore available rooms with photos, rent details, and facilities. Find your perfect space.
-                </p>
-                
-                <Link href="/room-tour">
-                  <Button className="w-full bg-white text-cyan-600 hover:bg-cyan-50 font-semibold py-3 rounded-xl transition-colors">
-                    <House className="mr-2 w-4 h-4" />
-                    Browse Rooms
-                  </Button>
-                </Link>
-              </CardContent>
-              <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/10 rounded-full"></div>
-            </Card>
+
 
             {/* Admin Panel Card - Only for admins */}
             <Card className="group relative overflow-hidden border-0 bg-gradient-to-br from-gray-700 to-gray-900 text-white shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-1">
@@ -512,6 +488,13 @@ export default function Home() {
               </CardContent>
               <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-white/10 rounded-full"></div>
             </Card>
+          </div>
+          
+          {/* Ice Breaker Section */}
+          <div className="mt-12">
+            <div className="max-w-2xl mx-auto">
+              <IceBreaker />
+            </div>
           </div>
         </div>
       </div>
