@@ -743,7 +743,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             const compatibilityScore = await compatibilityService.calculateCompatibility(userId, user.id);
             return {
               ...user,
-              compatibilityScore: Math.max(70, Math.round(compatibilityScore)) // Ensure minimum 70% for display
+              compatibilityScore: Math.round(compatibilityScore) // Show real score
             };
           } catch (error) {
             console.error(`Error calculating compatibility for user ${user.id}:`, error);
@@ -756,11 +756,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       );
       
       // Sort by compatibility score (highest first) and filter out very low scores
-      const filteredUsers = usersWithScores
-        .filter(user => user.compatibilityScore >= 70)
-        .sort((a, b) => b.compatibilityScore - a.compatibilityScore);
-      
-      res.json(filteredUsers);
+      const sortedUsers = usersWithScores.sort((a, b) => b.compatibilityScore - a.compatibilityScore);
+      res.json(sortedUsers);
     } catch (error) {
       console.error("Error fetching users for discover:", error);
       res.status(500).json({ message: "Failed to fetch users" });

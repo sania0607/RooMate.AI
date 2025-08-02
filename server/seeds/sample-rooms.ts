@@ -30,10 +30,10 @@ export async function seedSampleRooms() {
       roomType: "shared",
       maxOccupancy: 2,
       currentOccupancy: 1,
-      images: ["/placeholder-room-1.jpg"],
-      facilities: ["WiFi", "AC", "Parking", "Security", "Gym"],
-      nearbyPlaces: ["Metro Station - 500m", "Shopping Mall - 1km", "Hospital - 2km"],
-      contactInfo: {
+      images: ["/placeholder-room-1.jpg"], // Keep as array, not JSON string
+      facilities: ["WiFi", "AC", "Parking", "Security", "Gym"], // Keep as array
+      nearbyPlaces: ["Metro Station - 500m", "Shopping Mall - 1km", "Hospital - 2km"], // Keep as array
+      contactInfo: { // Keep as object
         phone: "+91-9876543210",
         whatsapp: "+91-9876543210",
         email: "contact@roommate.com"
@@ -144,20 +144,15 @@ export async function seedSampleRooms() {
     const existingRooms = await db.select().from(roomListings);
     if (existingRooms.length === 0) {
       console.log("Seeding sample room listings...");
-      // Serialize arrays/objects to JSON strings for DB compatibility
-      const serializableRooms = sampleRooms.map(room => ({
-        ...room,
-        images: JSON.stringify(room.images),
-        facilities: JSON.stringify(room.facilities),
-        nearbyPlaces: JSON.stringify(room.nearbyPlaces),
-        contactInfo: JSON.stringify(room.contactInfo)
-      }));
-      await db.insert(roomListings).values(serializableRooms);
+      
+      // Insert rooms directly without JSON.stringify - let Drizzle handle the serialization
+      await db.insert(roomListings).values(sampleRooms);
       console.log(`Successfully seeded ${sampleRooms.length} sample room listings.`);
     } else {
       console.log("Room listings already exist, skipping seed.");
     }
   } catch (error) {
     console.error("Error seeding sample rooms:", error);
+    throw error;
   }
 }
